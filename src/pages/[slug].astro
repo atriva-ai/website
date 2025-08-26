@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+// Dynamic route requires static paths
+export async function getStaticPaths() {
+  const pages = await getCollection("pages");
+  return pages
+    .filter((p) => p.slug !== "index") // skip homepage
+    .map((page) => ({ params: { slug: page.slug } }));
+}
+
+// Get the slug from URL
+const { slug } = Astro.params;
+const pages = await getCollection("pages");
+const page = pages.find((p) => p.slug === slug);
+if (!page) throw new Error(`Page not found: ${slug}`);
+
+// Render Markdown content
+const { Content } = await page.render();
+---
+
+<BaseLayout title={page.data.title} description={page.data.description}>
+  <article class="prose mx-auto px-4 py-8">
+    <Content />
+  </article>
+</BaseLayout>
