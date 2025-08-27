@@ -2,10 +2,9 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getEntry } from "astro:content";
 
-// Fetch index.md
 const page = await getEntry("pages", "index");
+if (!page) throw new Error("Could not find pages/index.md");
 
-// Render Markdown properly
 const { Content } = await page.render();
 ---
 

@@ -1,11 +1,12 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
-     "./src/**/*.{astro,html,js,jsx,ts,tsx,vue,svelte,md,mdx}",
+    "./src/**/*.{astro,html,js,jsx,ts,tsx,md,mdx}"
   ],
   theme: {
     extend: {},
   },
-  plugins: [],
-}
-
+  plugins: [
+    require('@tailwindcss/typography')
+  ],
+};

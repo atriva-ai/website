@@ -4,3 +4,7 @@
 
 :root { color-scheme: light dark; }
 html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+}
